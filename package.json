@@ -3,7 +3,7 @@
   "private": true,
   "description": "Experiments, including Math Sprint - a browser arithmetic game.",
   "scripts": {
-    "test": "node --test \"tests/*.test.js\"",
+    "test": "node --test tests/logic.test.js",
     "start": "python -m http.server 8000 --directory math-game"
   }
 }
