@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Math Sprint: a 60-second arithmetic challenge game." />
+  <meta name="theme-color" content="#4f46e5" />
+  <!-- Everything is self-hosted: block all external scripts/styles/connections. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>Math Sprint</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <!-- ===== Start screen ===== -->
+    <section id="start-screen" class="screen" aria-labelledby="title">
+      <h1 id="title">🧮 Math Sprint</h1>
+      <p class="subtitle">Answer as many questions as you can in <strong>60 seconds</strong>.</p>
+
+      <fieldset class="difficulty">
+        <legend>Choose a difficulty</legend>
+        <label class="level">
+          <input type="radio" name="difficulty" value="easy" checked />
+          <span><strong>Easy</strong><small>+ − up to 10 · 1 pt</small></span>
+        </label>
+        <label class="level">
+          <input type="radio" name="difficulty" value="medium" />
+          <span><strong>Medium</strong><small>+ − to 50, × to 10 · 2 pts</small></span>
+        </label>
+        <label class="level">
+          <input type="radio" name="difficulty" value="hard" />
+          <span><strong>Hard</strong><small>+ − to 100, × ÷ to 12 · 3 pts</small></span>
+        </label>
+      </fieldset>
+
+      <p class="best" id="start-best" aria-live="polite"></p>
+      <button id="start-btn" class="btn primary" type="button">Start Game</button>
+    </section>
+
+    <!-- ===== Game screen ===== -->
+    <section id="game-screen" class="screen" hidden>
+      <div class="hud">
+        <div class="stat"><span class="stat-label">Time</span><span id="timer" class="stat-value">1:00</span></div>
+        <div class="stat"><span class="stat-label">Score</span><span id="score" class="stat-value">0</span></div>
+        <div class="stat"><span class="stat-label">Streak</span><span id="streak" class="stat-value">0</span></div>
+      </div>
+      <div class="timebar" aria-hidden="true"><div id="timebar-fill"></div></div>
+
+      <p id="question" class="question" aria-live="polite">&nbsp;</p>
+
+      <form id="answer-form" class="answer-form" autocomplete="off" novalidate>
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <input id="answer" type="text" inputmode="numeric" pattern="[0-9]*"
+               maxlength="7" placeholder="?" enterkeyhint="go" />
+        <button type="submit" class="btn primary">Submit</button>
+      </form>
+
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+
+      <div class="game-actions">
+        <button id="skip-btn" class="btn ghost" type="button">Skip</button>
+        <button id="quit-btn" class="btn ghost" type="button">End Game</button>
+      </div>
+    </section>
+
+    <!-- ===== Results screen ===== -->
+    <section id="end-screen" class="screen" hidden aria-labelledby="end-title">
+      <h2 id="end-title">⏰ Time's up!</h2>
+      <p class="final-label">Final score</p>
+      <p id="final-score" class="final-score">0</p>
+      <p id="new-best" class="new-best" hidden>🏆 New best score!</p>
+
+      <dl class="summary">
+        <div><dt>Difficulty</dt><dd id="sum-level">-</dd></div>
+        <div><dt>Correct</dt><dd id="sum-correct">0</dd></div>
+        <div><dt>Wrong</dt><dd id="sum-wrong">0</dd></div>
+        <div><dt>Accuracy</dt><dd id="sum-accuracy">0%</dd></div>
+        <div><dt>Best streak</dt><dd id="sum-streak">0</dd></div>
+        <div><dt>Best score</dt><dd id="sum-best">0</dd></div>
+      </dl>
+
+      <div class="end-actions">
+        <button id="restart-btn" class="btn primary" type="button">Play Again</button>
+        <button id="menu-btn" class="btn secondary" type="button">New Game</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Made with plain HTML, CSS &amp; JavaScript · <a href="https://github.com/shankararya777/ai-engineering-lab">Source</a></footer>
+
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
